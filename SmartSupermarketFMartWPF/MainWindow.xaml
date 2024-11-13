@@ -1,0 +1,28 @@
+﻿<Window x:Class="SmartSupermarketFMartWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmartSupermarketFMartWPF"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <StackPanel Orientation="Vertical" Width="200" Background="#E3E3E3" HorizontalAlignment="Left">
+            <Button Content="Dashboard" Margin="10" Padding="10"/>
+            <Button x:Name="btn_InvManagement" Content="Inventory Management" Margin="10" Padding="10" Click="btn_InvManagement_Click"/>
+            <Button x:Name="btn_CusManagement" Content="Customer Management" Margin="10" Padding="10" Click="btn_CusManagement_Click"/>
+            <Button x:Name="btn_EmpManagement" Content="Employee Management" Margin="10" Padding="10" Click="btn_EmpManagement_Click"/>
+        </StackPanel>
+
+
+        <Grid Margin="210,10,10,10">
+            <StackPanel>
+                <TextBlock DockPanel.Dock="Top" FontSize="24" FontWeight="Bold" Text="Super Fmart Management System" HorizontalAlignment="Center" Margin="10"/>
+                <TextBlock Text="Dashboard" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                <TextBlock Text="Welcome to the Super Fmart Management Dashboard" FontSize="14"/>
+
+                <Frame Name="frMain" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"></Frame>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
