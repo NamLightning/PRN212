@@ -36,9 +36,9 @@ namespace SmartSupermarketFMartWPF
             if (CustomerListView.SelectedItem is Customer selectedCustomer)
             {
                 txtCustomerId.Text = selectedCustomer.CustomerId.ToString();
-                txtFullName.Text = selectedCustomer.FullName;
-                //txtFirstName.Text = selectedCustomer.FirstName;
-                //txtLastName.Text = selectedCustomer.LastName;
+                //txtFullName.Text = selectedCustomer.FullName;
+                txtFirstName.Text = selectedCustomer.FirstName;
+                txtLastName.Text = selectedCustomer.LastName;
                 txtEmail.Text = selectedCustomer.Email;
                 txtPhone.Text = selectedCustomer.Phone;
                 txtAddress.Text = selectedCustomer.Address;
