@@ -11,16 +11,13 @@ public partial class Customer
 
     public string LastName { get; set; } = null!;
 
+    public string FullName => $"{FirstName} {LastName}";
+
     public string Email { get; set; } = null!;
 
     public string? Phone { get; set; }
 
     public string? Address { get; set; }
-
-    public string GetFullName()
-    {
-        return $"{FirstName} {LastName}";
-    }
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }

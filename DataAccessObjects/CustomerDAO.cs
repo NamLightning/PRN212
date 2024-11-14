@@ -42,7 +42,7 @@ namespace DataAccessObjects
             {
                 using var context = new FmartDbContext();
                 List<Customer> listCustomer = context.Customers
-                                      .Where(b => b.GetFullName().Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+                                      .Where(b => b.FullName.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
 
                 if (listCustomer.Any())
                 {

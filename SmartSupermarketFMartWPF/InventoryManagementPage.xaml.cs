@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BusinessObjects.Model;
+using Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,127 @@ namespace SmartSupermarketFMartWPF
     /// </summary>
     public partial class InventoryManagementPage : Page
     {
+        private ProductRepository productRepository = new ProductRepository();
+
         public InventoryManagementPage()
         {
             InitializeComponent();
+            LoadProducts();
+        }
+
+        private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ProductListView.SelectedItem is Product selectedProduct)
+            {
+                txtProductId.Text = selectedProduct.ProductId.ToString();
+                txtProductName.Text = selectedProduct.Name;
+                txtCategory.Text = selectedProduct.Category;
+                txtPrice.Text = selectedProduct.Price.ToString();
+                txtStock.Text = selectedProduct.StockQuantity.ToString();
+                txtExpiryDate.Text = selectedProduct.ExpiryDate?.ToString("yyyy-MM-dd");
+            }
+        }
+
+        public void ClearInput()
+        {
+            txtProductId.Text = "";
+            txtProductName.Text = "";
+            txtCategory.Text = "";
+            txtPrice.Text = "";
+            txtStock.Text = "";
+            txtExpiryDate.Text = "";
+        }
+
+        private void LoadProducts()
+        {
+            try
+            {
+                ProductListView.SelectedItem = null;
+                ProductListView.ItemsSource = productRepository.GetProducts();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void AddClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var newProduct = new Product
+                {
+                    Name = txtProductName.Text,
+                    Category = txtCategory.Text,
+                    Price = decimal.Parse(txtPrice.Text),
+                    StockQuantity = int.Parse(txtStock.Text),
+                    ExpiryDate = DateTime.TryParse(txtExpiryDate.Text, out var expiryDate)
+                         ? DateOnly.FromDateTime(expiryDate)
+                         : (DateOnly?)null
+                };
+
+                productRepository.SaveProduct(newProduct);
+                LoadProducts();
+                ClearInput();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error creating product: " + ex.Message);
+            }
+        }
+
+        private void UpdateClick(object sender, RoutedEventArgs e)
+        {
+            if (ProductListView.SelectedItem is Product selectedProduct)
+            {
+                try
+                {
+                    selectedProduct.Name = txtProductName.Text;
+                    selectedProduct.Category = txtCategory.Text;
+                    selectedProduct.Price = decimal.Parse(txtPrice.Text);
+                    selectedProduct.StockQuantity = int.Parse(txtStock.Text);
+                    selectedProduct.ExpiryDate = DateTime.TryParse(txtExpiryDate.Text, out var expiryDate)
+                         ? DateOnly.FromDateTime(expiryDate)
+                         : (DateOnly?)null;
+
+                    productRepository.UpdateProduct(selectedProduct);
+                    LoadProducts();
+                    ClearInput();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error updating product: " + ex.Message);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a product to edit.");
+            }
+        }
+
+        private void DeleteClick(object sender, RoutedEventArgs e)
+        {
+            if (ProductListView.SelectedItem is Product selectedProduct)
+            {
+                var result = MessageBox.Show("Are you sure you want to delete this product?", "Confirmation", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+                    productRepository.DeleteProduct(selectedProduct);
+                    LoadProducts();
+                    ClearInput();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a product to delete.");
+            }
+        }
+        private void BackToMainWindow_Click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = new MainWindow();
+            mainWindow.Show();
+            var currentWindow = Window.GetWindow(this);
+            currentWindow?.Close();
         }
     }
 }
