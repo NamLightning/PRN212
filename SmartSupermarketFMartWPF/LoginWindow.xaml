@@ -4,88 +4,46 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartSupermarketFMartWPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="560"
-        Background="Transparent" ResizeMode="CanMinimize"
-        WindowStartupLocation="CenterScreen">
+        Title="LoginWindow" Height="450" Width="800" 
+        WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True">
     <Grid>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <Border Grid.RowSpan="2">
-                <Border.Background>
-                    <LinearGradientBrush>
-                        <GradientStop Color="BlueViolet" Offset="1"/>
-                        <GradientStop Color="CornflowerBlue" Offset="0.0"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-            </Border>
-
-            <StackPanel VerticalAlignment="Center">
-                <TextBlock Text="Smart FMart"
-                           FontWeight="Light"
-                           FontFamily="helvetica"
-                           FontSize="22"
-                           Foreground="White"
-                           HorizontalAlignment="Center"/>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0.1,0" EndPoint="0.9,1">
+                <GradientStop Color="#FFE63070" Offset="1" />
+                <GradientStop Color="#FFFE8704" Offset="0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Border Height="390" VerticalAlignment="Top" CornerRadius="0 0 180 0" Background="#100E17"/>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Width="350">
+                <Image Source="https://i.imghippo.com/files/ksUG9324gA.png" Width="250" Height="200" Stretch="Fill" Margin="0 70 0 0"/>
             </StackPanel>
-            <StackPanel Grid.Row="1"
-                        Width="450">
-                <TextBlock Text="Username: "
-                           FontWeight="Light"
-                           FontFamily="helvetica"
-                           FontSize="20"
-                           Foreground="White"
-                           TextAlignment="Left"
-                           Margin="0,0,0,12"/>
-
-                <TextBlock Text="Password: "
-                           FontWeight="Light"
-                           FontFamily="helvetica"
-                           FontSize="20"
-                           Foreground="White"
-                           TextAlignment="Left"/>
+            <StackPanel Width="350">
+                <StackPanel Margin="20 40">
+                    <TextBlock Text="Login" Margin="20" Foreground="White" TextAlignment="Center" FontSize="32" FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <materialDesign:PackIcon Kind="User" Width="25" Height="25" Foreground="White"/>
+                        <TextBox x:Name="txtUsername" Margin="10 0" materialDesign:HintAssist.Hint="Username" Background="Transparent" Foreground="White" Width="250" BorderBrush="White" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" BorderThickness="0,0,0,2"/>
+                    </StackPanel> 
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <materialDesign:PackIcon Kind="Lock" Width="25" Height="25" Foreground="White"/>
+                        <PasswordBox x:Name="txtPassword" Margin="10 0" materialDesign:HintAssist.Hint="********" Background="Transparent" Foreground="White" Width="250" BorderBrush="White" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" BorderThickness="0,0,0,2"/>
+                    </StackPanel>
+                    <StackPanel Margin="10" HorizontalAlignment="Center">
+                        <Button Width="100" Height="40" 
+                                materialDesign:ButtonAssist.CornerRadius="20" BorderBrush="#D94448"
+                                Background="#D94448" Foreground="White" ToolTip="Login" x:Name="btnLogin"  Click="Login_Button_Click" Content="Login" FontWeight="Bold"/>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Grid.Row="1">
-                <TextBox x:Name="txtUsername"
-                         FontWeight="Light"
-                         FontFamily="helvetica"
-                         FontSize="20"
-                         Foreground="White"
-                         Text=""
-                         HorizontalAlignment="Center"
-                         HorizontalContentAlignment="Left"
-                         Width="260"
-                         Background="Transparent"
-                         BorderThickness="1"
-                         BorderBrush="White"
-                         Opacity="0.5"
-                         Margin="0,0,0,10">
-                </TextBox>
-                <PasswordBox x:Name="txtPassword"
-                             FontWeight="Light"
-                             FontFamily="helvetica"
-                             FontSize="20"
-                             Foreground="White"
-                             Password=""
-                             HorizontalAlignment="Center"
-                             HorizontalContentAlignment="Left"
-                             Width="260"
-                             Background="Transparent"
-                             BorderThickness="1"
-                             BorderBrush="White"
-                             Opacity="0.5">
-                </PasswordBox>
+            <StackPanel Width="100">
+                <Button Margin="10 20" Background="{x:Null}"
+                 ToolTip="Close" x:Name="btnClose" Click="Close_Button_Click" BorderBrush="Transparent">
+                    <materialDesign:PackIcon Kind="Close" Foreground="White" Width="30" Height="30"/>
+                </Button>
             </StackPanel>
-            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,0">
-                <Button Width="100" Height="30" Content="Login" Margin="230,0,0,0" Click="Login_Button_Click"/>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,100,0,0">
-                <Button Width="100" Height="30" Content="Reset" Margin="230,0,0,0" Click="Reset_Button_Click"/>
-            </StackPanel>
-        </Grid>
+        </StackPanel>
     </Grid>
 </Window>
