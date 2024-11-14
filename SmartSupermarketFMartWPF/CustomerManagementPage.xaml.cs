@@ -36,9 +36,9 @@ namespace SmartSupermarketFMartWPF
             if (CustomerListView.SelectedItem is Customer selectedCustomer)
             {
                 txtCustomerId.Text = selectedCustomer.CustomerId.ToString();
-                //txtFullName.Text = selectedCustomer.GetFullName();
-                txtFirstName.Text = selectedCustomer.FirstName;
-                txtLastName.Text = selectedCustomer.LastName;
+                txtFullName.Text = selectedCustomer.FullName;
+                //txtFirstName.Text = selectedCustomer.FirstName;
+                //txtLastName.Text = selectedCustomer.LastName;
                 txtEmail.Text = selectedCustomer.Email;
                 txtPhone.Text = selectedCustomer.Phone;
                 txtAddress.Text = selectedCustomer.Address;
@@ -48,9 +48,15 @@ namespace SmartSupermarketFMartWPF
 
         private void LoadCustomers()
         {
-            CustomerListView.SelectedItem = null;
-            CustomerListView.ItemsSource = customerRepository.GetCustomers();
-
+            try
+            {
+                CustomerListView.SelectedItem = null;
+                CustomerListView.ItemsSource = customerRepository.GetCustomers();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void SearchClick(object sender, RoutedEventArgs e)
@@ -59,7 +65,7 @@ namespace SmartSupermarketFMartWPF
             var customers = customerRepository.GetCustomers();
 
             if (!string.IsNullOrEmpty(name))
-                customers = customers.Where(c => c.GetFullName().Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
+                customers = customers.Where(c => c.FullName.Contains(name, StringComparison.OrdinalIgnoreCase)).ToList();
             CustomerListView.ItemsSource = customers;
         }
 
