@@ -54,11 +54,15 @@ namespace SmartSupermarketFMartWPF
                 MessageBox.Show("You have no permission to access this function!");
             }
         }
-
         private void Reset_Button_Click(object sender, RoutedEventArgs e)
         {
             txtUsername.Text = "";
             txtPassword.Password = "";
+        }
+
+        private void Close_Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
