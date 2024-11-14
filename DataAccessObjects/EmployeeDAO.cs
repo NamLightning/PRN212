@@ -72,7 +72,7 @@ namespace DataAccessObjects
                 var c = context.Employees.SingleOrDefault(c => c.EmployeeId == Employee.EmployeeId);
                 if (c != null)
                 {
-                    context.Employees.Remove(c);              
+                    context.Employees.Remove(c);
                     context.SaveChanges();
                 }
             }
@@ -98,7 +98,7 @@ namespace DataAccessObjects
             return Employee;
         }
 
-        
+
     }
 }
 

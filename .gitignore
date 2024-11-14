@@ -1,10 +1,10 @@
 /BusinessObjects/bin/
 /BusinessObjects/obj/
+/BusinessObjects/appsettings.json
 /DataAccessObjects/bin/
 /DataAccessObjects/obj/
 /Repositories/bin/
 /Repositories/obj/
 /SmartSupermarketFMartWPF/bin/
 /SmartSupermarketFMartWPF/obj/
-/SmartSupermarketFMartWPF/appsettings.json
 /.vs/

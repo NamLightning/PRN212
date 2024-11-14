@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace BusinessObjects.Model;
 
@@ -26,7 +27,15 @@ public partial class FmartDbContext : DbContext
     public virtual DbSet<Product> Products { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=(local)\\MSSQLSERVER01;database=FMartDB;uid=sa;pwd=abc123;TrustServerCertificate=true;Trusted_Connection=SSPI;Encrypt=false;");
+        => optionsBuilder.UseSqlServer(GetConnectionString());
+
+    private string GetConnectionString()
+    {
+        IConfiguration configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", false, true).Build();
+        return configuration["ConnectionStrings:DefaultConnectionString"];
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
