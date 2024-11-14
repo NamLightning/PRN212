@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace BusinessObjects.Model;
 
@@ -26,24 +27,24 @@ public partial class FmartDbContext : DbContext
     public virtual DbSet<Product> Products { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("server=(local);database=FMartDB;uid=sa;pwd=abc123;TrustServerCertificate=true;Encrypt=false;");
+    => optionsBuilder.UseSqlServer(GetConnectionString());
 
+    private string GetConnectionString()
+    {
+        IConfiguration configuration = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("appsettings.json", false, true).Build();
+        return configuration["ConnectionStrings:DefaultConnectionString"];
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64B82DA0C0E7");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64B87C6CEB6D");
 
-            entity.HasIndex(e => e.Email, "UQ__Customer__A9D10534C997C856").IsUnique();
+            entity.HasIndex(e => e.Phone, "UQ__Customer__5C7E359EFEB2F00C").IsUnique();
 
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
-            entity.Property(e => e.Address)
-                .HasMaxLength(200)
-                .IsUnicode(false);
-            entity.Property(e => e.Email)
-                .HasMaxLength(100)
-                .IsUnicode(false);
             entity.Property(e => e.FirstName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -57,9 +58,9 @@ public partial class FmartDbContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF138F6805F");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF1FD7D71EC");
 
-            entity.HasIndex(e => e.Email, "UQ__Employee__A9D105342F0BBC8F").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Employee__A9D1053484051A81").IsUnique();
 
             entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
             entity.Property(e => e.Email)
@@ -81,7 +82,7 @@ public partial class FmartDbContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BAF70B19AE0");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BAF42DC0B3F");
 
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
@@ -97,7 +98,7 @@ public partial class FmartDbContext : DbContext
 
         modelBuilder.Entity<OrderDetail>(entity =>
         {
-            entity.HasKey(e => e.OrderDetailId).HasName("PK__OrderDet__D3B9D30CAA8BA8FD");
+            entity.HasKey(e => e.OrderDetailId).HasName("PK__OrderDet__D3B9D30C7DDC996B");
 
             entity.Property(e => e.OrderDetailId).HasColumnName("OrderDetailID");
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
@@ -115,7 +116,7 @@ public partial class FmartDbContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Products__B40CC6ED2549BA0E");
+            entity.HasKey(e => e.ProductId).HasName("PK__Products__B40CC6EDF896B11E");
 
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
             entity.Property(e => e.Category)

@@ -26,13 +26,21 @@ namespace SmartSupermarketFMartWPF
         public EmployeeManagementPage()
         {
             InitializeComponent();
+            LoadEmployees();
         }
 
         private void LoadEmployees()
         {
+            try 
+            { 
             dgData.ItemsSource = null;
             dgData.ItemsSource = empRepo.GetEmployees();
-        }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+}
         private void dgData_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (dgData.SelectedIndex == -1) return;
@@ -142,66 +150,47 @@ namespace SmartSupermarketFMartWPF
         }
         private void btnEdit_click(object sender, RoutedEventArgs e)
         {
-            try
+            if (dgData.SelectedItem is Employee selectedEmployee)
             {
-                if (txtEmployeeID.Text.length > 0)
-                {
-                    Employee employee = new Employee();
-                    employee.EmployeeId = txtEmployeeID.Text;
-                    employee.FirstName = txtFirstName.Text;
-                    employee.LastName = txtLastName.Text;
-                    employee.Position = txtPosition.Text;
-                    employee.Phone = txtPhone.Text;
-                    employee.Email = txtEmail.Text;
-                    empRepo.UpdateEmployee(employee);
-                }
-                else 
-                {
-                    MessageBox.Show("You must select a Employee!");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
+                selectedEmployee.FirstName = txtFirstName.Text;
+                selectedEmployee.LastName = txtLastName.Text;
+                selectedEmployee.Position = txtPosition.Text;
+                selectedEmployee.Phone = txtPhone.Text;
+                selectedEmployee.Email = txtEmail.Text;
+                empRepo.UpdateEmployee(selectedEmployee);
                 LoadEmployees();
+            }
+            else
+            {
+                MessageBox.Show("Please select a employee to edit.");
             }
         }
 
         private void btnDelete_click(object sender, RoutedEventArgs e)
         {
-            try
+
+            if (dgData.SelectedItem is Employee selectedEmployee)
             {
-                if (txtEmployeeID.Text.length > 0)
+                var result = MessageBox.Show("Are you sure you want to delete this employee?", "Confirmation", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
                 {
-                    Employee employee = new Employee();
-                    employee.EmployeeId = txtEmployeeID.Text;
-                    employee.FirstName = txtFirstName.Text;
-                    employee.LastName = txtLastName.Text;
-                    employee.Position = txtPosition.Text;
-                    employee.Phone = txtPhone.Text;
-                    employee.Email = txtEmail.Text;
-                    empRepo.DeleteEmployee(employee);
-                }
-                else
-                {
-                    MessageBox.Show("You must select a Employee!");
+                    empRepo.DeleteEmployee(selectedEmployee);
+                    LoadEmployees();
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                LoadEmployees();
+                MessageBox.Show("Please select a customer to delete.");
             }
         }
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadEmployees();
+        }
+
+        private void txtFirstName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

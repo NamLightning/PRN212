@@ -13,7 +13,11 @@ public partial class OrderDetail
 
     public int Quantity { get; set; }
 
-    public decimal PriceAtPurchase { get; set; }
+    public decimal PriceAtPurchase
+    {
+        get => (Product != null) ? Product.Price * Quantity : 0;
+        set { }
+    }
 
     public virtual Order? Order { get; set; }
 
