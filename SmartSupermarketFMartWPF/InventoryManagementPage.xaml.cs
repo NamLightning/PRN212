@@ -2,6 +2,8 @@
 using Repositories;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,6 +42,7 @@ namespace SmartSupermarketFMartWPF
                 txtPrice.Text = selectedProduct.Price.ToString();
                 txtStock.Text = selectedProduct.StockQuantity.ToString();
                 txtExpiryDate.Text = selectedProduct.ExpiryDate?.ToString("yyyy-MM-dd");
+                ProductImageDisplay.Source = DisplayImage(selectedProduct.ProductImage);
             }
         }
 
@@ -51,6 +54,7 @@ namespace SmartSupermarketFMartWPF
             txtPrice.Text = "";
             txtStock.Text = "";
             txtExpiryDate.Text = "";
+            ProductImageDisplay.Source = null;
         }
 
         private void LoadProducts()
@@ -78,7 +82,8 @@ namespace SmartSupermarketFMartWPF
                     StockQuantity = int.Parse(txtStock.Text),
                     ExpiryDate = DateTime.TryParse(txtExpiryDate.Text, out var expiryDate)
                          ? DateOnly.FromDateTime(expiryDate)
-                         : (DateOnly?)null
+                         : (DateOnly?)null,
+                    ProductImage = GetImageFromDisplay()
                 };
 
                 productRepository.SaveProduct(newProduct);
@@ -104,7 +109,10 @@ namespace SmartSupermarketFMartWPF
                     selectedProduct.ExpiryDate = DateTime.TryParse(txtExpiryDate.Text, out var expiryDate)
                          ? DateOnly.FromDateTime(expiryDate)
                          : (DateOnly?)null;
-
+                    if (GetImageFromDisplay() != null)
+                    {
+                        selectedProduct.ProductImage = GetImageFromDisplay();
+                    }
                     productRepository.UpdateProduct(selectedProduct);
                     LoadProducts();
                     ClearInput();
@@ -137,12 +145,84 @@ namespace SmartSupermarketFMartWPF
                 MessageBox.Show("Please select a product to delete.");
             }
         }
-        private void BackToMainWindow_Click(object sender, RoutedEventArgs e)
+
+        private byte[] ConvertImageToByteArray(string filePath)
         {
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
-            var currentWindow = Window.GetWindow(this);
-            currentWindow?.Close();
+            return File.ReadAllBytes(filePath);
+        }
+
+        private void UploadImage_Click(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "Image Files (*.jpg; *.jpeg; *.png)|*.jpg;*.jpeg;*.png"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string filePath = openFileDialog.FileName;
+
+                var imageBytes = ConvertImageToByteArray(filePath);
+
+                ProductImageDisplay.Source = DisplayImage(imageBytes);
+            }
+        }
+
+        private BitmapImage DisplayImage(byte[] imageBytes)
+        {
+            if (imageBytes != null && imageBytes.Length > 0)
+            {
+                using (var ms = new MemoryStream(imageBytes))
+                {
+                    var image = new BitmapImage();
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = ms;
+                    image.EndInit();
+                    return image;
+                }
+            }
+            return null;
+        }
+
+        private byte[] GetImageFromDisplay()
+        {
+            if (ProductImageDisplay.Source is BitmapSource bitmapSource)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    var encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                    encoder.Save(ms);
+                    return ms.ToArray();
+                }
+            }
+            return null;
+        }
+    }
+
+    public class ByteArrayToImageSourceConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is byte[] imageData && imageData.Length > 0)
+            {
+                var image = new BitmapImage();
+                using (var ms = new MemoryStream(imageData))
+                {
+                    image.BeginInit();
+                    image.CacheOption = BitmapCacheOption.OnLoad;
+                    image.StreamSource = ms;
+                    image.EndInit();
+                }
+                return image;
+            }
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

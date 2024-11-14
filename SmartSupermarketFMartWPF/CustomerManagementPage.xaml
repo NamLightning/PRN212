@@ -15,9 +15,10 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="7*"/>
         </Grid.RowDefinitions>
+
         <!-- First Row: Search Area -->
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 20">
-            <StackPanel Width="250" Margin="10,0,0,0">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Width="250">
                 <TextBlock Text="Full Name" Margin="0, 0, 0, 5"
                            Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
                 <TextBox x:Name="txtFullName" Width="230" Margin="0, 0, 0, 5"
@@ -32,16 +33,16 @@
         </StackPanel>
 
         <!-- Second Row: DataGrid and Input Form -->
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="0, 20, 0, 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="10*"/>
                 <ColumnDefinition Width="7*" />
             </Grid.ColumnDefinitions>
 
             <!-- Customer List DataGrid -->
             <DataGrid x:Name="CustomerListView" Grid.Column="0"
-                      SelectionChanged="dgData_SelectionChanged" AutoGenerateColumns="False"
-                      VerticalAlignment="Top" HorizontalAlignment="Left" IsReadOnly="True"
+                      HorizontalScrollBarVisibility="Disabled" SelectionChanged="dgData_SelectionChanged" AutoGenerateColumns="False"
+                      VerticalAlignment="Top" HorizontalAlignment="Center" IsReadOnly="True"
                       Style="{StaticResource MaterialDesignDataGrid}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding CustomerId}"/>
