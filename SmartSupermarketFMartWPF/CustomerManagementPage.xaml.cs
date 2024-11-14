@@ -59,6 +59,17 @@ namespace SmartSupermarketFMartWPF
             }
         }
 
+        private void ClearInput()
+        {
+            txtCustomerId.Text = "";
+            //txtFullName.Text = selectedCustomer.FullName;
+            txtFirstName.Text = "";
+            txtLastName.Text = "";
+            txtEmail.Text = "";
+            txtPhone.Text = "";
+            txtAddress.Text = "";
+        }
+
         private void SearchClick(object sender, RoutedEventArgs e)
         {
             var name = txtFullName.Text;
@@ -82,6 +93,7 @@ namespace SmartSupermarketFMartWPF
 
             customerRepository.SaveCustomer(newCustomer);
             LoadCustomers();
+            ClearInput();
         }
 
         private void UpdateClick(object sender, RoutedEventArgs e)
@@ -95,6 +107,7 @@ namespace SmartSupermarketFMartWPF
                 selectedCustomer.Address = txtAddress.Text;
                 customerRepository.UpdateCustomer(selectedCustomer);
                 LoadCustomers();
+                ClearInput();
             }
             else
             {
@@ -111,6 +124,7 @@ namespace SmartSupermarketFMartWPF
                 {
                     customerRepository.DeleteCustomer(selectedCustomer);
                     LoadCustomers();
+                    ClearInput();
                 }
             }
             else

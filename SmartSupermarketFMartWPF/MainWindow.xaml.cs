@@ -36,5 +36,10 @@ namespace SmartSupermarketFMartWPF
         {
             frMain.Content = new EmployeeManagementPage();
         }
+
+        private void btn_MonthlyReports_Click(object sender, RoutedEventArgs e)
+        {
+            frMain.Content = new MonthlyReportsPage();
+        }
     }
 }
