@@ -18,10 +18,10 @@
         <Grid Margin="210,10,10,10">
             <StackPanel>
                 <TextBlock DockPanel.Dock="Top" FontSize="24" FontWeight="Bold" Text="Super Fmart Management System" HorizontalAlignment="Center" Margin="10"/>
-                <TextBlock Text="Dashboard" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-                <TextBlock Text="Welcome to the Super Fmart Management Dashboard" FontSize="14"/>
+                <!--<TextBlock Text="Dashboard" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+                <TextBlock Text="Welcome to the Super Fmart Management Dashboard" FontSize="14"/>-->
 
-                <Frame Name="frMain" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"></Frame>
+                <Frame Name="frMain" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" NavigationUIVisibility="Hidden"></Frame>
             </StackPanel>
         </Grid>
     </Grid>
