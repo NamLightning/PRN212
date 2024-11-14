@@ -27,7 +27,7 @@ public partial class FmartDbContext : DbContext
     public virtual DbSet<Product> Products { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer(GetConnectionString());
+    => optionsBuilder.UseSqlServer(GetConnectionString());
 
     private string GetConnectionString()
     {
@@ -41,17 +41,11 @@ public partial class FmartDbContext : DbContext
     {
         modelBuilder.Entity<Customer>(entity =>
         {
-            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64B83ACFE95D");
+            entity.HasKey(e => e.CustomerId).HasName("PK__Customer__A4AE64B877427B42");
 
-            entity.HasIndex(e => e.Email, "UQ__Customer__A9D1053416541A81").IsUnique();
+            entity.HasIndex(e => e.Phone, "UQ__Customer__5C7E359E50169B0C").IsUnique();
 
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
-            entity.Property(e => e.Address)
-                .HasMaxLength(200)
-                .IsUnicode(false);
-            entity.Property(e => e.Email)
-                .HasMaxLength(100)
-                .IsUnicode(false);
             entity.Property(e => e.FirstName)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -65,9 +59,9 @@ public partial class FmartDbContext : DbContext
 
         modelBuilder.Entity<Employee>(entity =>
         {
-            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF1EC89C62F");
+            entity.HasKey(e => e.EmployeeId).HasName("PK__Employee__7AD04FF1E7266FE3");
 
-            entity.HasIndex(e => e.Email, "UQ__Employee__A9D10534978DBF7C").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Employee__A9D105341A675723").IsUnique();
 
             entity.Property(e => e.EmployeeId).HasColumnName("EmployeeID");
             entity.Property(e => e.Email)
@@ -89,7 +83,7 @@ public partial class FmartDbContext : DbContext
 
         modelBuilder.Entity<Order>(entity =>
         {
-            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BAF8A95E33E");
+            entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BAF86F28D98");
 
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
             entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
@@ -105,7 +99,7 @@ public partial class FmartDbContext : DbContext
 
         modelBuilder.Entity<OrderDetail>(entity =>
         {
-            entity.HasKey(e => e.OrderDetailId).HasName("PK__OrderDet__D3B9D30C7EAEA71D");
+            entity.HasKey(e => e.OrderDetailId).HasName("PK__OrderDet__D3B9D30C763E84F4");
 
             entity.Property(e => e.OrderDetailId).HasColumnName("OrderDetailID");
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
@@ -123,7 +117,7 @@ public partial class FmartDbContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Products__B40CC6EDD1D77A48");
+            entity.HasKey(e => e.ProductId).HasName("PK__Products__B40CC6ED54D19D7C");
 
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
             entity.Property(e => e.Category)
