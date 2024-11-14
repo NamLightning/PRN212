@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace BusinessObjects.Model;
 
@@ -16,6 +17,8 @@ public partial class Product
     public int StockQuantity { get; set; }
 
     public DateOnly? ExpiryDate { get; set; }
+
+    public byte[]? ProductImage { get; set; }
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 }

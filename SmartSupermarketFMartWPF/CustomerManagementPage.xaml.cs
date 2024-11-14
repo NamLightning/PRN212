@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static MaterialDesignThemes.Wpf.Theme;
 
 namespace SmartSupermarketFMartWPF
 {
@@ -36,7 +37,6 @@ namespace SmartSupermarketFMartWPF
             if (CustomerListView.SelectedItem is Customer selectedCustomer)
             {
                 txtCustomerId.Text = selectedCustomer.CustomerId.ToString();
-                //txtFullName.Text = selectedCustomer.FullName;
                 txtFirstName.Text = selectedCustomer.FirstName;
                 txtLastName.Text = selectedCustomer.LastName;
                 txtPhone.Text = selectedCustomer.Phone;
@@ -60,7 +60,7 @@ namespace SmartSupermarketFMartWPF
         private void ClearInput()
         {
             txtCustomerId.Text = "";
-            //txtFullName.Text = selectedCustomer.FullName;
+            txtFullName.Text = "";
             txtFirstName.Text = "";
             txtLastName.Text = "";
             txtPhone.Text = "";

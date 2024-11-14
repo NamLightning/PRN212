@@ -9,14 +9,14 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="MainWindow" Height="740" Width="1280"
         WindowStartupLocation="CenterScreen" WindowStyle="None" AllowsTransparency="True" Background="Transparent">
-    <Grid MouseDown="Border_MouseDown">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!--LeftMenu-->
-        <Border CornerRadius="10 0 0 10">
+        <Border CornerRadius="10 0 0 10" MouseDown="Border_MouseDown">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0.0,0" EndPoint="0.5,1">
                     <GradientStop Color="#223266" Offset="0"/>
@@ -26,7 +26,7 @@
 
 
             <StackPanel>
-                    <!--Admin-->
+                <!--Admin-->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 35 0 0">
                     <Border CornerRadius="10" Width="40" Height="40">
                         <Border.Background>
@@ -74,18 +74,12 @@
                     </StackPanel>
                 </Button>
 
-                <Button Style="{StaticResource menuButton}">
+                <Button Style="{StaticResource menuButton}" x:Name="btn_MonthlyReports" Click="btn_MonthlyReports_Click">
                     <StackPanel Orientation="Horizontal">
                         <fa:IconImage Icon="Coins" Style="{StaticResource menuButtonIcon}"/>
                         <TextBlock Text="Revenue" Style="{StaticResource menuButtonText}"/>
                     </StackPanel>
                 </Button>
-                <!--<Button Style="{StaticResource menuButton}" x:Name="btn_MonthlyReports" Click="btn_MonthlyReports_Click">
-    <StackPanel Orientation="Horizontal">
-        <fa:IconImage Icon="Coins" Style="{StaticResource menuButtonIcon}"/>
-        <TextBlock Text="Revenue" Style="{StaticResource menuButtonText}"/>
-    </StackPanel>
-</Button>-->
 
                 <Button Style="{StaticResource menuButton}" x:Name="btn_EmpManagement"  Click="btn_EmpManagement_Click">
                     <StackPanel Orientation="Horizontal">
@@ -93,7 +87,7 @@
                         <TextBlock Text="Employee Management" Style="{StaticResource menuButtonText}"/>
                     </StackPanel>
                 </Button>
-                
+
 
             </StackPanel>
         </Border>
@@ -115,13 +109,13 @@
                 </Grid.RowDefinitions>
 
                 <!--Top Menu-->
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 30 20">
+                <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0 0 30 20">
                     <Button  Content="Today" Style="{StaticResource topMenuButton}"/>
                     <Button  Content="Week" Style="{StaticResource topMenuButton}" Background="#5b60c4" Foreground="#ffffff"/>
                     <Button  Content="Month" Style="{StaticResource topMenuButton}"/>
                     <Button  Content="Year" Style="{StaticResource topMenuButton}"/>
                     <Button Margin="10 20" Background="{x:Null}"
- ToolTip="Close" x:Name="btnClose" Click="Close_Button_Click" BorderBrush="Transparent">
+                            ToolTip="Close" x:Name="btnClose" Click="Close_Button_Click" BorderBrush="Transparent">
                         <materialDesign:PackIcon Kind="Close" Foreground="White" Width="20" Height="20"/>
                     </Button>
                 </StackPanel>
@@ -135,12 +129,10 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
-
                     </Grid.ColumnDefinitions>
                 </Grid>
-                <Frame Name="frMain" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"></Frame>
+                <Frame Grid.Row="2" Name="frMain" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"></Frame>
             </Grid>
         </Border>
-
     </Grid>
 </Window>
