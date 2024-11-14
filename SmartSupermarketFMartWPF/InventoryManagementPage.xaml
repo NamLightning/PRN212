@@ -11,7 +11,7 @@
     <Grid>
         <DataGrid x:Name="ProductListView" Grid.Column="0" SelectionChanged="dgData_SelectionChanged" AutoGenerateColumns="False" Margin="0,0,298,0" VerticalAlignment="Top" HorizontalAlignment="Left">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding ProductId}"  Width="40" />
+                <DataGridTextColumn Header="ID" Binding="{Binding ProductId}"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="Category" Binding="{Binding Category}"/>
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}"/>
@@ -19,7 +19,7 @@
                 <DataGridTextColumn Header="Expiry Date" Binding="{Binding ExpiryDate}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel x:Name="dgInput" Margin="502,0,0,0">
+        <StackPanel x:Name="dgInput" HorizontalAlignment="Right">
             <StackPanel  Margin="20, 0, 20, 10">
                 <TextBlock Text="ProductID" Width="217" Height="17"/>
                 <TextBox x:Name="txtProductId" Width="215" IsReadOnly="True"/>
