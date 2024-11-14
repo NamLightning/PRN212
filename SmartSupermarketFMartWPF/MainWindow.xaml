@@ -26,7 +26,7 @@
 
 
             <StackPanel>
-                <!--Admin-->
+                    <!--Admin-->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 35 0 0">
                     <Border CornerRadius="10" Width="40" Height="40">
                         <Border.Background>
@@ -93,6 +93,7 @@
                         <TextBlock Text="Employee Management" Style="{StaticResource menuButtonText}"/>
                     </StackPanel>
                 </Button>
+                
 
             </StackPanel>
         </Border>

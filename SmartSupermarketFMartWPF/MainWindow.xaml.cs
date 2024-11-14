@@ -37,6 +37,7 @@ namespace SmartSupermarketFMartWPF
             frMain.Content = new EmployeeManagementPage();
         }
 
+<<<<<<< HEAD
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if(e.ChangedButton == MouseButton.Left)
@@ -48,6 +49,11 @@ namespace SmartSupermarketFMartWPF
         private void Close_Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+=======
+        private void btn_MonthlyReports_Click(object sender, RoutedEventArgs e)
+        {
+            frMain.Content = new MonthlyReportsPage();
+>>>>>>> ac8f8cf0aee117a07ef59e743d97b9568cfa9253
         }
     }
 }

@@ -31,14 +31,13 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <!--First Column-->
-            <DataGrid x:Name="CustomerListView" Grid.Column="0" SelectionChanged="dgData_SelectionChanged" AutoGenerateColumns="False" Margin="0,0,264,0">
+            <DataGrid x:Name="CustomerListView" Grid.Column="0" SelectionChanged="dgData_SelectionChanged" AutoGenerateColumns="False" VerticalAlignment="Top" HorizontalAlignment="Left" IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding CustomerId}"  Width="50" />
-                    <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}" Width="80" />
-                    <DataGridTextColumn Header="LastName" Binding="{Binding LastName}" Width="80" />
-                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="100"/>
-                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="100"/>
-                    <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="120"/>
+                    <DataGridTextColumn Header="ID" Binding="{Binding CustomerId}"/>
+                    <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}"/>
+                    <DataGridTextColumn Header="Address" Binding="{Binding Address}"/>
                 </DataGrid.Columns>
             </DataGrid>
             <!--Second Column-->

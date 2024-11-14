@@ -34,7 +34,7 @@ namespace SmartSupermarketFMartWPF
         {
             IConfiguration configuration = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile("appsettings.json", false, true).Build();
+                    .AddJsonFile("appsetting.json", false, true).Build();
             return configuration;
         }
 
