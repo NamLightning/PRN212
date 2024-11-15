@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid>
-            <DataGrid HorizontalScrollBarVisibility="Disabled" CanUserResizeColumns="False" x:Name="ReportsListView" AutoGenerateColumns="False" IsReadOnly="True" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <DataGrid HorizontalScrollBarVisibility="Disabled" BorderBrush="#37474F" BorderThickness="1" CanUserResizeColumns="False" x:Name="ReportsListView" AutoGenerateColumns="False" IsReadOnly="True" VerticalAlignment="Top" HorizontalAlignment="Center">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Total Sales" Binding="{Binding TotalSales}"/>
                     <DataGridTextColumn Header="Total Revenue" Binding="{Binding TotalRevenue}"/>

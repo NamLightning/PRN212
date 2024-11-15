@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SmartSupermarketFMartWPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="LoginWindow" Height="450" Width="800" 
+        Title="LoginWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True">
     <Grid>
         <Grid.Background>
@@ -26,13 +26,13 @@
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <materialDesign:PackIcon Kind="User" Width="25" Height="25" Foreground="White"/>
                         <TextBox x:Name="txtUsername" Margin="10 0" materialDesign:HintAssist.Hint="Username" Background="Transparent" Foreground="White" Width="250" BorderBrush="White" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" BorderThickness="0,0,0,2"/>
-                    </StackPanel> 
+                    </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <materialDesign:PackIcon Kind="Lock" Width="25" Height="25" Foreground="White"/>
                         <PasswordBox x:Name="txtPassword" Margin="10 0" materialDesign:HintAssist.Hint="********" Background="Transparent" Foreground="White" Width="250" BorderBrush="White" CaretBrush="#FFD94448" SelectionBrush="#FFD94448" BorderThickness="0,0,0,2"/>
                     </StackPanel>
                     <StackPanel Margin="10" HorizontalAlignment="Center">
-                        <Button Width="100" Height="40" 
+                        <Button Width="100" Height="40"
                                 materialDesign:ButtonAssist.CornerRadius="20" BorderBrush="#223266"
                                 Background="#FFD94448" Foreground="White" ToolTip="Login" x:Name="btnLogin"  Click="Login_Button_Click" Content="Login" FontWeight="Bold"/>
                     </StackPanel>
@@ -40,7 +40,7 @@
             </StackPanel>
             <StackPanel Width="100">
                 <Button Margin="10 20" Background="{x:Null}"
-                 ToolTip="Close" x:Name="btnClose" Click="Close_Button_Click" BorderBrush="Transparent">
+                        ToolTip="Close" x:Name="btnClose" Click="Close_Button_Click" BorderBrush="Transparent">
                     <materialDesign:PackIcon Kind="Close" Foreground="White" Width="30" Height="30"/>
                 </Button>
             </StackPanel>
