@@ -8,7 +8,6 @@
       mc:Ignorable="d"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="CustomerManagementPage">
-
     <Grid>
         <!--Row Definition-->
         <Grid.RowDefinitions>
@@ -19,14 +18,14 @@
         <!-- First Row: Search Area -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Width="250">
-                <TextBlock Text="Full Name" Margin="0, 0, 0, 5"
+                <TextBlock Panel.ZIndex="1" Foreground="White" IsHitTestVisible="False" Text="Full Name" Margin="10, 0, 0, 5"
                            Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
-                <TextBox x:Name="txtFullName" Width="230" Margin="0, 0, 0, 5"
+                <TextBox Width="250" x:Name="txtFullName"  Margin="0, 0, 0, 5"
                          Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}"
                          materialDesign:HintAssist.Hint="Enter Full Name"/>
             </StackPanel>
-            <StackPanel>
-                <Button x:Name="btnSearch" Content="Search" Width="100" Margin="15 15 0 0"
+            <StackPanel VerticalAlignment="Bottom">
+                <Button x:Name="btnSearch" Content="Search" Width="100" Margin="15 0 0 0"
                         Style="{StaticResource MaterialDesignFlatButton}" Click="SearchClick"
                         materialDesign:ButtonAssist.CornerRadius="8"/>
             </StackPanel>
@@ -43,7 +42,7 @@
             <DataGrid x:Name="CustomerListView" Grid.Column="0"
                       HorizontalScrollBarVisibility="Disabled" SelectionChanged="dgData_SelectionChanged" AutoGenerateColumns="False"
                       VerticalAlignment="Top" HorizontalAlignment="Center" IsReadOnly="True"
-                      Style="{StaticResource MaterialDesignDataGrid}">
+                      Style="{StaticResource MaterialDesignDataGrid}" BorderBrush="#37474F" BorderThickness="1">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding CustomerId}"/>
                     <DataGridTextColumn Header="Full Name" Binding="{Binding FullName}"/>
@@ -56,7 +55,7 @@
                         Background="{DynamicResource MaterialDesignPaper}" HorizontalAlignment="Right">
 
                 <StackPanel Margin="10, 0, 10, 10">
-                    <TextBlock Text="Customer ID" Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
+                    <TextBlock Foreground="White" Text="Customer ID" Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
                     <TextBox x:Name="txtCustomerId" Width="200"
                              Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}"
                              IsReadOnly="True"/>
@@ -64,19 +63,19 @@
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10, 0, 10, 10">
                     <StackPanel Margin="3, 0, 5, 0">
-                        <TextBlock Text="First Name" Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
+                        <TextBlock Foreground="White" Text="First Name" Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
                         <TextBox x:Name="txtFirstName" Width="100"
                                  Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}" />
                     </StackPanel>
                     <StackPanel Margin="10, 0, 0, 0">
-                        <TextBlock Text="Last Name" Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
+                        <TextBlock Foreground="White" Text="Last Name" Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
                         <TextBox x:Name="txtLastName" Width="100"
                                  Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}" />
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Margin="10, 0, 10, 10">
-                    <TextBlock Text="Phone" Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
+                    <TextBlock Foreground="White" Text="Phone" Style="{StaticResource MaterialDesignCaptionTextBlock}"/>
                     <TextBox x:Name="txtPhone" Width="200"
                              Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}" />
                 </StackPanel>

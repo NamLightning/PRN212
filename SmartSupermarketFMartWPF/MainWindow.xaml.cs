@@ -49,6 +49,7 @@ namespace SmartSupermarketFMartWPF
         {
             this.Close();
         }
+
         private void btn_MonthlyReports_Click(object sender, RoutedEventArgs e)
         {
             frMain.Content = new MonthlyReportsPage();
